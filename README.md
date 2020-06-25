@@ -1,24 +1,48 @@
-# **Behavioral Cloning** 
+# **Udacity Self-Driving Car - Neural Networks Behavioral Cloning** 
 
-**Behavioral Cloning Project**
+**Neural Networks Behavioral Cloning Project**
 
-The goals / steps of this project are the following:
-* Use the simulator to collect data of good driving behavior
+![Behavioral Cloning Gif](readme_images/video.gif)
+
+The goals of this project:
+* Use the Unity 3D simulator to collect data of good driving behavior
 * Build a convolution neural network in Keras that predicts steering angles from images
 * Train and validate the model with a training and validation set
-* Test that the model successfully drives around track one without leaving the road
-* Summarize the results with a written report
+* Test that the model successfully drives around track without leaving the road
 
-The image below is an example of the project
+## Getting Started
 
-![alt text][example]
+### Unity 3D Simulator
+
+Please refer to this [repository](https://github.com/udacity/self-driving-car-sim) for self-driving car simulators. This project uses Term 1 simulator.
+
+#### Download Links:
+
+[Linux](https://d17h27t6h515a5.cloudfront.net/topher/2016/November/5831f0f7_simulator-linux/simulator-linux.zip)
+
+[Mac](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/Term1-Sim/term1-simulator-mac.zip)
+
+[Windows](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/Term1-Sim/term1-simulator-windows.zip)
+
+#### Run the Simulator
+
+Once the simulator application is opened, there are two modes for selection. **Traning Mode** is for collecting traning data, and **Autonomous Mode** is for driving autonomously by our trained neural network.
+
+This project is about track 1. However, I will collect and train the model for track 2 as well in the future.
+
+In the Traning Mode, there is a **RECORD** button on the top right corner of the screen. This is for capturing driving data. It will prompt for the location to store the traning and validation data. I recommend to choose a hard drive with more storage space and create a folder with a nicer name (e.g. CarTrainingData/). Then the simulator starts to record.
+
+Keyboard Arrow Keys and WASD are configured to control the vehicle. However, I recomment to use mouse for more smooth and precise steering angle.
+
+You can choose to capture 1 lap of driving data or 10 laps, depends on your objectives. However, I found that around 2 laps of data is enough to drive safely around the lake. I recommend to start with smaller training data to reduce training time. You can always come back and collect more data if your want better neural network performance.
+
+Once you are satisfied with the data collection, you can press **RECORD** button again to stop record.
+
+
+<img src="readme_images/example.jpg" alt="drawing" width="450"/>
 
 [//]: # (Image References)
-[example]: ./writeup_images/example.jpg "Example Image"
-[hard]: ./writeup_images/hard.jpg "Hard Scenario Image"
-
-## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+[hard]: readme_images/hard.jpg "Hard Scenario Image"
 
 ---
 ### Files Submitted & Code Quality
@@ -46,7 +70,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-<img src="./writeup_images/cnn-architecture-624x890.png" width="400">
+<img src="readme_images/cnn-architecture-624x890.png" width="400">
 
 My model is based on Nvidia's CNN architecture for self-driving cars. Start from bottom to top, the network consists of a nomalization layer, 5 convolution layers, and 4 fully connected layers.
 
