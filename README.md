@@ -10,6 +10,24 @@ The goals of this project:
 * Train and validate the model with a training and validation set
 * Test that the model successfully drives around track without leaving the road
 
+[//]: # (Image References)
+[hard]: readme_images/hard.jpg "Hard Scenario Image"
+
+---
+
+This project includes the following files:
+* `model.py` containing the script to create and train the model
+* `resume_training.py` containint the script to reopen the trained model and apply further training
+* `drive.py` for driving the car in autonomous mode
+* `model.h5` containing a trained convolution neural network 
+
+Using the Unity 3D simulator and the drive.py file, the car can be driven autonomously around the track by executing 
+```
+python drive.py model.h5
+```
+
+`model.py` contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+
 ## Getting Started
 
 ### Unity 3D Simulator
@@ -40,31 +58,6 @@ Once you are satisfied with the data collection, you can press **RECORD** button
 
 
 <img src="readme_images/example.jpg" alt="drawing" width="450"/>
-
-[//]: # (Image References)
-[hard]: readme_images/hard.jpg "Hard Scenario Image"
-
----
-### Files Submitted & Code Quality
-
-#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
-
-My project includes the following files:
-* model.py containing the script to create and train the model
-* resume_training.py containint the script to reopen the trained model and apply further training
-* drive.py for driving the car in autonomous mode
-* model.h5 containing a trained convolution neural network 
-* writeup_report.md or writeup_report.pdf summarizing the results
-
-#### 2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
-```sh
-python drive.py model.h5
-```
-
-#### 3. Submission code is usable and readable
-
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ### Model Architecture and Training Strategy
 
