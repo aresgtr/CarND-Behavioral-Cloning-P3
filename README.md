@@ -10,9 +10,6 @@ The goals of this project:
 * Train and validate the model with a training and validation set
 * Test that the model successfully drives around track without leaving the road
 
-[//]: # (Image References)
-[hard]: readme_images/hard.jpg "Hard Scenario Image"
-
 ---
 
 This project includes the following files:
@@ -30,11 +27,22 @@ python drive.py model.h5
 
 ## Getting Started
 
-### Unity 3D Simulator
+### Installing Dependencies
+
+#### Python 3.5.3
+
+PIP Dependendies
+
+```
+pip install -r requirements.txt
+```
+Note: Will be updated to Python 3.7
+
+#### Unity 3D Simulator
 
 Please refer to this [repository](https://github.com/udacity/self-driving-car-sim) for self-driving car simulators. This project uses Term 1 simulator.
 
-#### Download Links:
+##### Download Links:
 
 [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2016/November/5831f0f7_simulator-linux/simulator-linux.zip)
 
@@ -42,7 +50,7 @@ Please refer to this [repository](https://github.com/udacity/self-driving-car-si
 
 [Windows](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/Term1-Sim/term1-simulator-windows.zip)
 
-#### Run the Simulator
+##### Run the Simulator
 
 Once the simulator application is opened, there are two modes for selection. **Traning Mode** is for collecting traning data, and **Autonomous Mode** is for driving autonomously by our trained neural network.
 
@@ -56,18 +64,46 @@ You can choose to capture 1 lap of driving data or 10 laps, depends on your obje
 
 Once you are satisfied with the data collection, you can press **RECORD** button again to stop record.
 
+### Train the model
+
+Prior training, you need to modify `model.py`. Paths need to point to the recorded training data from simulator.
+
+To train the model:
+```
+python model.py
+```
+
+#### Resume Training
+
+You can always come back and resume training if you want to improve the model performance:
+
+1. Repeat the above steps for collecting driving data from simulator. You can make a new folder for new training data.
+2. Modify `resume_training.py`. Paths need to point to the newly recorded training data from simulator.
+3. Train the model, by: `python resume_training.py`
+
+Note that previous training is saved in the model. Resume training will not remove previous training results. It will only enhance the model performance.
+
+### Run the trained neural networks to drive the simulator automatically
+
+Run the trained model by:
+
+```
+python drive.py model.h5
+```
+Then, close and reopen the simulator. Select **Autonomous** mode. The vehicle will drive automatically. If the vehicle runs out of the track, go back and resume training with more data.
 
 <img src="readme_images/example.jpg" alt="drawing" width="450"/>
 
+
 ### Model Architecture and Training Strategy
 
-#### 1. An appropriate model architecture has been employed
+#### Nvidia's CNN architecture for real self-driving cars
 
 <img src="readme_images/cnn-architecture-624x890.png" width="400">
 
-My model is based on Nvidia's CNN architecture for self-driving cars. Start from bottom to top, the network consists of a nomalization layer, 5 convolution layers, and 4 fully connected layers.
+My model is based on [Nvidia's CNN architecture for self-driving cars](https://developer.nvidia.com/blog/deep-learning-self-driving-cars/). Start from bottom to top, the network consists of a nomalization layer, 5 convolution layers, and 4 fully connected layers.
 
-The top and bottom portions of the training image (i.e., the sky and the hood of the car) is cropped off for better training performance.
+Note: The top and bottom portions of the training image (i.e., the sky and the hood of the car) is cropped off for better training speed. These image portions have limited effects on training results.
 
 ```python
 """
@@ -101,21 +137,19 @@ model.add(Dense(10))
 model.add(Dense(1))
 ```
 
-#### 2. Attempts to reduce overfitting in the model
+#### Reduce overfitting in the model
 
-From the code above, I implemented a dropout layer before the four fully connected layers in order to reduce overfitting. 
+From the code above, I implemented a dropout layer before the four fully connected layers in order to reduce overfitting.
 
-The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+#### Model parameter tuning
 
-#### 3. Model parameter tuning
-
-The model used an adam optimizer, so the learning rate was not tuned manually.
+The model used an adam optimizer, and it will automatically adjust learning rate.
 
 ```python
 model.compile(loss='mse', optimizer='adam')
 ```
 
-#### 4. Appropriate training data
+#### Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road.
 
@@ -123,7 +157,7 @@ Udacity has given the training data for initial training. The training data is s
 
 The image below is an example of a difficult sharp curve.
 
-![alt text][hard]
+<img src="readme_images/hard.jpg" width="400">
 
 To improve performance, more data are collected by driving through the sharp corners. I have both scenarios of driving at the center of the road, and driving to the edge and "save" the car back to the center of the road for trainig data.
 
