@@ -11,10 +11,10 @@ import matplotlib.pyplot as plt
 """
 Import training data
 """
+# Path to driving log
 csv_location = 'D:\\UdacityCarData\\data\\driving_log.csv'
-# csv_location = '/opt/carnd_p3/data/driving_log.csv'
+# Path to image data
 image_dir = 'D:\\UdacityCarData\\data\\IMG\\'
-# image_dir = '/opt/carnd_p3/data/IMG/'
 
 lines = []
 with open(csv_location) as csvfile:
